@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -6,18 +7,29 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
 import { GameMode } from '@/types/GameMode';
-import { GameBoard } from './components/game-board';
+import { GameBoard } from '@/components/game-board';
 
 const App = () => {
   const [gameMode, setGameMode] = useState<GameMode>();
   const [gameStarted, setGameStarted] = useState(false);
 
+  const handleResetGame = () => {
+    setGameMode(undefined);
+    setGameStarted(false);
+  };
+
   return (
     <div className="container sm:max-w-[48rem] pt-10 sm:pt-20">
       <div className="flex flex-col space-y-4">
-        <div className="text-4xl">Matchi</div>
+        <div className="flex items-center justify-between">
+          <div className="text-4xl">Matchi</div>
+          {gameStarted && (
+            <Button variant="outline" onClick={handleResetGame}>
+              New Game
+            </Button>
+          )}
+        </div>
         {!gameStarted ? (
           <>
             <div className="tracking-tight">
@@ -47,7 +59,7 @@ const App = () => {
             </div>
           </>
         ) : (
-          <GameBoard />
+          <GameBoard gameMode={gameMode} />
         )}
       </div>
     </div>
