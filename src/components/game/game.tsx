@@ -27,11 +27,6 @@ export const Game = () => {
       <div className="flex flex-col space-y-6">
         <div className="flex items-center justify-between">
           <div className="text-5xl font-bold">Matchi</div>
-          {gameStarted && (
-            <Button variant="outline" onClick={handleResetGame}>
-              New Game
-            </Button>
-          )}
         </div>
         {!gameStarted ? (
           <>
@@ -62,7 +57,7 @@ export const Game = () => {
             </div>
           </>
         ) : (
-          <GameBoard gameMode={gameMode} />
+          <GameBoard gameMode={gameMode} resetGame={handleResetGame} />
         )}
       </div>
     </div>

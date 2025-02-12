@@ -4,14 +4,19 @@ import { MoveCounter } from '@/components/game/move-counter';
 import { GameTimer } from '@/components/game/game-timer';
 import { GameBoardTile } from '@/components/game/game-board-tile';
 import { generateGameCards } from '@/lib/generateGameCards';
+import { GameComplete } from '@/components/game/game-complete';
+import { Button } from '@/components/ui/button';
+import { RotateCcw } from 'lucide-react';
 
 type GameBoardProps = {
   gameMode?: GameMode;
+  resetGame: () => void;
 };
 
-export const GameBoard = ({ gameMode }: GameBoardProps) => {
+export const GameBoard = ({ gameMode, resetGame }: GameBoardProps) => {
   const [moves, setMoves] = useState(0);
-  const [gameActive, setGameActive] = useState(true);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [gameComplete, setGameComplete] = useState(false);
   const [openCards, setOpenCards] = useState<number[]>([]);
   const [gameCards, setGameCards] = useState(generateGameCards(gameMode));
   const timeout = useRef<NodeJS.Timeout | null>(null);
@@ -43,28 +48,38 @@ export const GameBoard = ({ gameMode }: GameBoardProps) => {
 
   useEffect(() => {
     if (gameCards.length === gameCards.filter((d) => d.matched).length) {
-      setGameActive(false);
+      setGameComplete(true);
     }
   }, [gameCards]);
 
   if (!gameMode) return null;
 
   return (
-    <div className="flex flex-col space-y-2">
-      <div className="flex justify-between">
-        <MoveCounter moves={moves} />
-        <GameTimer running={gameActive} />
-      </div>
-      <div className="grid gap-4 grid-cols-4 w-fit border p-4 rounded-md shadow-md">
-        {gameCards.map((card, i) => (
-          <GameBoardTile
-            key={`${card.category}-${i}`}
-            flipped={openCards.includes(i) || card.matched}
-            onClick={() => handleCardClick(i)}
-            {...card}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      {gameComplete ? (
+        <GameComplete moves={moves} time={elapsedSeconds} onClick={resetGame} />
+      ) : (
+        <div className="flex flex-col space-y-2">
+          <div className="flex justify-between">
+            <MoveCounter moves={moves} />
+            <GameTimer time={elapsedSeconds} setTime={setElapsedSeconds} />
+            <Button variant="outline" onClick={resetGame}>
+              <RotateCcw />
+              Restart
+            </Button>
+          </div>
+          <div className="grid gap-4 grid-cols-4 w-fit border p-4 rounded-md shadow-md">
+            {gameCards.map((card, i) => (
+              <GameBoardTile
+                key={`${card.category}-${i}`}
+                flipped={openCards.includes(i) || card.matched}
+                onClick={() => handleCardClick(i)}
+                {...card}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
