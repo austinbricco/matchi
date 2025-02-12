@@ -1,8 +1,8 @@
 import { GameMode } from '@/types/GameMode';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { MoveCounter } from '@/components/move-counter';
-import { GameTimer } from '@/components/game-timer';
-import { GameBoardTile } from '@/components/game-board-tile';
+import { MoveCounter } from '@/components/game/move-counter';
+import { GameTimer } from '@/components/game/game-timer';
+import { GameBoardTile } from '@/components/game/game-board-tile';
 import { generateGameCards } from '@/lib/generateGameCards';
 
 type GameBoardProps = {

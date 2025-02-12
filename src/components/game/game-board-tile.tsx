@@ -19,7 +19,7 @@ export const GameBoardTile = ({ flipped, icon, matched, onClick }: GameBoardTile
       disabled={matched}
       onClick={onClick}
     >
-      {flipped ? icon : <Pyramid />}
+      {flipped || matched ? icon : <Pyramid />}
     </Button>
   );
 };

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { GameStat } from '@/components/game-stat';
+import { GameStat } from '@/components/game/game-stat';
 
 type GameTimerProps = {
   running?: boolean;

@@ -1,4 +1,4 @@
-import { GameStat } from '@/components/game-stat';
+import { GameStat } from '@/components/game/game-stat';
 
 type MoveCounterProps = {
   moves: number;
