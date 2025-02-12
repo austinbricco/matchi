@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { MoveCounter } from '@/components/move-counter';
 import { GameTimer } from '@/components/game-timer';
 import { GameBoardTile } from '@/components/game-board-tile';
-import { UNIQUE_GAME_CARDS } from '@/constants/GameCards';
+import { generateGameCards } from '@/lib/generateGameCards';
 
 type GameBoardProps = {
   gameMode?: GameMode;
@@ -13,9 +13,7 @@ export const GameBoard = ({ gameMode }: GameBoardProps) => {
   const [moves, setMoves] = useState(0);
   const [gameActive, setGameActive] = useState(true);
   const [openCards, setOpenCards] = useState<number[]>([]);
-  const [gameCards, setGameCards] = useState(
-    UNIQUE_GAME_CARDS.concat(UNIQUE_GAME_CARDS).sort(() => 0.5 - Math.random())
-  );
+  const [gameCards, setGameCards] = useState(generateGameCards(gameMode));
   const timeout = useRef<NodeJS.Timeout | null>(null);
 
   const handleCardClick = (cardIndex: number) => {

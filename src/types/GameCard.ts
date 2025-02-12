@@ -1,4 +1,12 @@
-export type GameCardCategory = 'apple' | 'bomb' | 'cookie' | 'ghost';
+export type GameCardCategory =
+  | 'anchor'
+  | 'apple'
+  | 'baby'
+  | 'banana'
+  | 'bomb'
+  | 'cookie'
+  | 'crown'
+  | 'ghost';
 
 export type GameCard = {
   category: GameCardCategory;
