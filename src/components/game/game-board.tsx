@@ -50,8 +50,8 @@ export const GameBoard = ({ gameMode }: GameBoardProps) => {
   if (!gameMode) return null;
 
   return (
-    <div className="flex flex-col space-y-4">
-      <div className="flex space-x-4">
+    <div className="flex flex-col space-y-2">
+      <div className="flex justify-between">
         <MoveCounter moves={moves} />
         <GameTimer running={gameActive} />
       </div>
