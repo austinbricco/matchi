@@ -59,7 +59,7 @@ export const GameBoard = ({ gameMode }: GameBoardProps) => {
         {gameCards.map((card, i) => (
           <GameBoardTile
             key={`${card.category}-${i}`}
-            flipped={openCards.includes(i)}
+            flipped={openCards.includes(i) || card.matched}
             onClick={() => handleCardClick(i)}
             {...card}
           />
