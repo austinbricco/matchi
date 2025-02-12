@@ -10,7 +10,7 @@ type GameCompleteProps = {
 export const GameComplete = ({ moves, time, onClick }: GameCompleteProps) => {
   return (
     <div className="motion-opacity-in-0 motion-translate-y-in-100 motion-blur-in-sm motion-preset-confetti motion-duration-2000">
-      <div className="flex flex-col space-y-2 border rounded-md shadow-md px-4 py-2">
+      <div className="flex flex-col space-y-2 border rounded-md shadow-md p-4">
         <div className="text-4xl text-center font-bold">Winner!</div>
         <div className="flex gap-4 justify-center pb-6">
           <div>

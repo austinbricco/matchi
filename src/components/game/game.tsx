@@ -22,7 +22,7 @@ export const Game = () => {
 
   return (
     <div
-      className={cn('container sm:max-w-[48rem] pt-10 sm:pt-20', gameStarted && 'sm:max-w-[25rem]')}
+      className={cn('container sm:max-w-[48rem] pt-6 sm:pt-20', gameStarted && 'sm:max-w-[25rem]')}
     >
       <div className="flex flex-col space-y-6">
         <div className="flex items-center justify-between">

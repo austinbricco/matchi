@@ -3,8 +3,8 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 
 const App = () => {
   return (
-    <div className="flex flex-col flex-grow">
-      <div className="text-right p-4">
+    <div className="flex flex-col flex-grow p-2 sm:p-4">
+      <div className="text-right">
         <ThemeSwitcher />
       </div>
       <Game />

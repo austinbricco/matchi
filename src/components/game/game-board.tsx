@@ -63,9 +63,8 @@ export const GameBoard = ({ gameMode, resetGame }: GameBoardProps) => {
           <div className="flex justify-between">
             <MoveCounter moves={moves} />
             <GameTimer time={elapsedSeconds} setTime={setElapsedSeconds} />
-            <Button variant="outline" onClick={resetGame}>
+            <Button aria-label="Restart game" variant="outline" onClick={resetGame}>
               <RotateCcw />
-              Restart
             </Button>
           </div>
           <div className="grid gap-4 grid-cols-4 w-fit border p-4 rounded-md shadow-md">
