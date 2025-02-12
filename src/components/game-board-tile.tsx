@@ -1,19 +1,23 @@
 import { Pyramid } from 'lucide-react';
-import { useState } from 'react';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
+import { GameCard } from '@/types/GameCard';
+import { cn } from '@/lib/utils';
 
 type GameBoardTileProps = {
-  icon: React.ReactNode;
-};
+  flipped: boolean;
+  onClick: () => void;
+} & Pick<GameCard, 'icon' | 'matched'>;
 
-export const GameBoardTile = ({ icon }: GameBoardTileProps) => {
-  const [flipped, setFlipped] = useState(false);
-
+export const GameBoardTile = ({ flipped, icon, matched, onClick }: GameBoardTileProps) => {
   return (
     <Button
-      className="h-12 w-12 shadow-sm hover:shadow-md [&_svg]:size-6"
+      className={cn(
+        'h-14 w-14 sm:h-16 sm:w-16 shadow-sm hover:shadow-md [&_svg]:size-7 sm:[&_svg]:size-8 [&_svg]:stroke-1',
+        matched && 'border-green-400 bg-green-200'
+      )}
       variant="outline"
-      onClick={() => setFlipped(!flipped)}
+      disabled={matched}
+      onClick={onClick}
     >
       {flipped ? icon : <Pyramid />}
     </Button>

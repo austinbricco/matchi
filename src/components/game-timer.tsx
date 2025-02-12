@@ -1,17 +1,26 @@
 import { useCallback, useEffect, useState } from 'react';
+import { GameStat } from '@/components/game-stat';
 
-export const GameTimer = () => {
+type GameTimerProps = {
+  running?: boolean;
+};
+
+export const GameTimer = ({ running = true }: GameTimerProps) => {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setElapsedSeconds((prev) => prev + 1);
-    }, 1000);
+    let interval: NodeJS.Timeout | null = null;
+
+    if (running) {
+      interval = setInterval(() => {
+        setElapsedSeconds((prev) => prev + 1);
+      }, 1000);
+    }
 
     return () => {
-      clearInterval(interval);
+      if (interval) clearInterval(interval);
     };
-  });
+  }, [running]);
 
   const formatTime = useCallback((seconds: number) => {
     const hrs = Math.floor(seconds / 3600);
@@ -20,10 +29,5 @@ export const GameTimer = () => {
     return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   }, []);
 
-  return (
-    <div className="flex items-center gap-2">
-      <div className="text-lg font-semibold">Timer:</div>
-      <div>{formatTime(elapsedSeconds)}</div>
-    </div>
-  );
+  return <GameStat label="Timer" value={formatTime(elapsedSeconds)} />;
 };

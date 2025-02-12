@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { GameMode } from '@/types/GameMode';
 import { GameBoard } from '@/components/game-board';
+import { cn } from '@/lib/utils';
 
 const App = () => {
   const [gameMode, setGameMode] = useState<GameMode>();
@@ -20,10 +21,12 @@ const App = () => {
   };
 
   return (
-    <div className="container sm:max-w-[48rem] pt-10 sm:pt-20">
+    <div
+      className={cn('container sm:max-w-[48rem] pt-10 sm:pt-20', gameStarted && 'sm:max-w-[25rem]')}
+    >
       <div className="flex flex-col space-y-4">
         <div className="flex items-center justify-between">
-          <div className="text-4xl">Matchi</div>
+          <div className="text-5xl font-bold">Matchi</div>
           {gameStarted && (
             <Button variant="outline" onClick={handleResetGame}>
               New Game
@@ -32,7 +35,7 @@ const App = () => {
         </div>
         {!gameStarted ? (
           <>
-            <div className="tracking-tight">
+            <div className="tracking-tight leading-normal">
               Matchi is a fun and challenging memory matching game where players flip tiles to find
               matching symbols. Test your memory and concentration as you race against time to match
               all the tiles using the fewest flips possible. Sharpen your skills, beat your best
@@ -40,8 +43,8 @@ const App = () => {
             </div>
             <div className="flex items-center space-x-4">
               <Select value={gameMode} onValueChange={(v: GameMode) => setGameMode(v)}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select game mode" />
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Game mode" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="easy">Easy</SelectItem>

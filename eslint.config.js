@@ -35,6 +35,7 @@ export default tseslint.config(
       ...react.configs['jsx-runtime'].rules,
       '@typescript-eslint/no-confusing-void-expression': 'off',
       '@typescript-eslint/consistent-type-definitions': 'off',
+      '@typescript-eslint/restrict-template-expressions': 'off',
     },
   }
 );
